@@ -40,6 +40,9 @@ public class ObjectFactory {
     @SneakyThrows
     public <T> T createObject(Class<T> type) {
 
+        // todo 1 make @Benchmark work also if it presnet above specific method
+        // todo 2 refactor - move this code to some other place like ProcyConfiguer  or ObjectConfigurer
+        // todo 3 imposable bonus: support turn on/off bechmark without restart (JMX)
         type = resolveImpl(type);
         T t = type.newInstance();
         configure(t);
