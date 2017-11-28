@@ -8,11 +8,12 @@ import java.util.Map;
  * @since 3.2
  */
 public class JavaConfig implements Config {
-    private Map<Class,Class> ifc2Impl = new HashMap<Class, Class>();
+    private Map<Class,Class> ifc2Impl = new HashMap<>();
 
 
     public JavaConfig() {
         ifc2Impl.put(Speaker.class, ConsoleSpeaker.class);
+        ifc2Impl.put(Cleaner.class, CleanerImpl.class);
 
     }
 

@@ -6,7 +6,10 @@ package myspring;
  */
 public class Main {
     public static void main(String[] args) {
-        IRobot iRobot = ObjectFactory.getInstance().createObject(IRobot.class);
-        iRobot.cleanRoom();
+       /* IRobot iRobot = ObjectFactory.getInstance().createObject(IRobot.class);
+        iRobot.cleanRoom();*/
+        EbayService ebayService = ObjectFactory.getInstance().createObject(EbayService.class);
+        ebayService.doWork();
+        ebayService.playTennis();
     }
 }

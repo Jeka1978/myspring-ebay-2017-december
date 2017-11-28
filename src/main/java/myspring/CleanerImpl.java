@@ -1,14 +1,18 @@
 package myspring;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @author Evgeny Borisov
  * @since 3.2
  */
-public class CleanerImpl implements Cleaner {
+@Benchmark
+public final class CleanerImpl implements Cleaner {
     @InjectRandomInt(min = 3, max = 7)
     private int repeat;
 
-    public CleanerImpl() {
+    @PostConstruct
+    public void init() {
         System.out.println("repeat = " + repeat);
     }
 

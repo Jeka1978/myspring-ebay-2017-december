@@ -1,8 +1,10 @@
 package myspring;
 
 import lombok.SneakyThrows;
+import org.reflections.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.Set;
 
 /**
  * @author Evgeny Borisov
@@ -13,7 +15,7 @@ public class InjectByTypeObjectConfigurator implements ObjectConfigurator {
     @SneakyThrows
     public void configure(Object t) {
         Class<?> type = t.getClass();
-        Field[] fields = type.getDeclaredFields();
+        Set<Field> fields = ReflectionUtils.getAllFields(type);
         for (Field field : fields) {
             if (field.isAnnotationPresent(InjectByType.class)) {
                 Class<?> typeToInject = field.getType();
