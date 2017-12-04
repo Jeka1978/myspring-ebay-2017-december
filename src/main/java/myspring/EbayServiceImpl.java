@@ -4,6 +4,8 @@ package myspring;
  * @author Evgeny Borisov
  * @since 3.2
  */
+
+@Transactional
 public class EbayServiceImpl implements EbayService {
     @Override
     public void doWork() {
@@ -15,4 +17,5 @@ public class EbayServiceImpl implements EbayService {
     public void playTennis() {
         System.out.println("don't forget OREN to take your ROCKET");
     }
+
 }

@@ -20,6 +20,8 @@ public class ObjectFactory {
     private Config config = new JavaConfig();
     private Reflections scanner = new Reflections("myspring");
     private List<ObjectConfigurator> objectConfigurators = new ArrayList<>();
+    private List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
+
 
     public static ObjectFactory getInstance() {
         return ourInstance;
@@ -33,6 +35,12 @@ public class ObjectFactory {
                 objectConfigurators.add(aClass.newInstance());
             }
         }
+        Set<Class<? extends ProxyConfigurator>> classes = scanner.getSubTypesOf(ProxyConfigurator.class);
+        for (Class<? extends ProxyConfigurator> aClass : classes) {
+            if (!Modifier.isAbstract(aClass.getModifiers())) {
+                proxyConfigurators.add(aClass.newInstance());
+            }
+        }
 
     }
 
@@ -40,32 +48,23 @@ public class ObjectFactory {
     @SneakyThrows
     public <T> T createObject(Class<T> type) {
 
-        // todo 1 make @Benchmark work also if it presnet above specific method
-        // todo 2 refactor - move this code to some other place like ProcyConfiguer  or ObjectConfigurer
-        // todo 3 imposable bonus: support turn on/off bechmark without restart (JMX)
+
+
         type = resolveImpl(type);
         T t = type.newInstance();
         configure(t);
         invokeInitMethods(type, t);
-        if (type.isAnnotationPresent(Benchmark.class)) {
-            return (T) Proxy.newProxyInstance(type.getClassLoader(), type.getInterfaces(), new InvocationHandler() {
-                @Override
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    System.out.println("********** BENCHMARK started for method "+method.getName()+" **********");
-                    long start = System.nanoTime();
-                    Object retVal = method.invoke(t, args);
-                    long end = System.nanoTime();
+        t = configureProxy(type, t);
+        return t;
+    }
 
-                    System.out.println(end-start);
 
-                    System.out.println("********** BENCHMARK end for method "+method.getName()+" **********");
 
-                    return retVal;
-                }
-            });
+
+    private <T> T configureProxy(Class<T> type, T t) {
+        for (ProxyConfigurator proxyConfigurator : proxyConfigurators) {
+            t = (T) proxyConfigurator.wrapWithProxy(t, type);
         }
-
-
         return t;
     }
 
