@@ -6,6 +6,8 @@
 
 
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    <bean class="myspring.InjectRandomIntAnnotationObjectConfigurator"/>
+    <bean class="quoters.BeanDefinitionAnalyzerBeanFactoryPostProcessor"/>
 
 
     <bean id="anotherQuoter" class="java.lang.String">
@@ -25,7 +27,7 @@
         <property name="message" value="2 B || ! 2 B"/>
     </bean>
 
-    <bean id="terminatorQuoter" class="quoters.TerminatorQuoter">
+    <bean id="terminatorQuoter" class="quoters.TerminatorQuoter" destroy-method="terminate">
         <property name="messages">
             <list value-type="java.lang.String">
                 <value>I'll be back</value>

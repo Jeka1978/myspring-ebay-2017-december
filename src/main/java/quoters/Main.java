@@ -14,6 +14,9 @@ public class Main {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
 
+        context.close();
+
+
 
     }
 }

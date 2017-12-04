@@ -2,6 +2,9 @@ package myspring;
 
 import lombok.SneakyThrows;
 import org.reflections.ReflectionUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.lang.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.Random;
@@ -11,7 +14,7 @@ import java.util.Set;
  * @author Evgeny Borisov
  * @since 3.2
  */
-public class InjectRandomIntAnnotationObjectConfigurator implements ObjectConfigurator {
+public class InjectRandomIntAnnotationObjectConfigurator implements ObjectConfigurator, BeanPostProcessor {
     private Random random = new Random();
 
     @SneakyThrows
@@ -31,5 +34,12 @@ public class InjectRandomIntAnnotationObjectConfigurator implements ObjectConfig
             }
         }
 
+    }
+
+    @Nullable
+    @Override
+    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        configure(bean);
+        return bean;
     }
 }
