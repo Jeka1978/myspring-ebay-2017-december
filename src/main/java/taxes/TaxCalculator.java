@@ -1,6 +1,7 @@
 package taxes;
 
 import myspring.InjectByType;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author Evgeny Borisov
