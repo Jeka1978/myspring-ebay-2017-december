@@ -10,7 +10,8 @@ import java.util.Map;
  */
 public class Main {
     public static void main(String[] args) {
-        new ClassPathXmlApplicationContext("context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+
 
     }
 }

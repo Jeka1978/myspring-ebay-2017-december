@@ -1,7 +1,5 @@
 package quoters;
 
-import lombok.Setter;
-
 import java.util.List;
 
 /**
@@ -9,11 +7,14 @@ import java.util.List;
  * @since 3.2
  */
 public class TalkingRobotImpl implements TalkingRobot {
-    private List<Quoter> quoters;
+    private final List<Quoter> quoters;
 
-    public void setQuoters(List<Quoter> quoters) {
+
+    public TalkingRobotImpl(List<Quoter> quoters) {
         this.quoters = quoters;
     }
+
+
 
     @Override
     public void talk() {
