@@ -17,7 +17,7 @@ public class TaxCalculatorTest {
         MaamResolver mock = Mockito.mock(MaamResolver.class);
         Mockito.when(mock.getMaam()).thenReturn(0.2);
 
-        taxCalculator.setMaamResolver(mock);
+//        taxCalculator.setMaamResolver(mock);
 
         double withMaam = taxCalculator.withMaam(100);
         Assert.assertEquals(120,withMaam,0.00001);
