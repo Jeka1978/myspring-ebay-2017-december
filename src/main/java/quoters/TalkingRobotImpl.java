@@ -1,5 +1,6 @@
 package quoters;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -16,7 +17,9 @@ public class TalkingRobotImpl implements TalkingRobot {
 
 
 
+
     @Override
+    @PostConstruct
     public void talk() {
         quoters.forEach(Quoter::sayQuote);
     }
