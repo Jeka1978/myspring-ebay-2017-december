@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import static qualifiers.Type.BACKUP;
+import static qualifiers.Type.MAIN;
+
 /**
  * @author Evgeny Borisov
  */
@@ -16,7 +19,8 @@ public class MainService {
 
 
     @Autowired
-    public MainService(Dao backupDao, Dao mainDao) {
+    public MainService(@Db(BACKUP) Dao backupDao,
+                       @Db(MAIN) Dao mainDao) {
         this.backupDao = backupDao;
         this.mainDao = mainDao;
     }
@@ -30,6 +34,7 @@ public class MainService {
     @Scheduled(cron = "1/3 * * * * ?")
     public void doBackup() {
         System.out.println("backuping");
+        backupDao.save();
     }
 
 }

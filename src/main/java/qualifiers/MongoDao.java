@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @author Evgeny Borisov
  */
-@Repository
+@Db(Type.MAIN)
 public class MongoDao implements Dao {
     @Override
     public void save() {
