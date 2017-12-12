@@ -10,9 +10,12 @@
     <context:component-scan base-package="quoters"/>
     <context:component-scan base-package="myspring"/>
 
+    <bean id="color" class="java.awt.Color">
 
-
-
+        <constructor-arg index="0" type="int" value="255"/>
+        <constructor-arg index="1" type="int" value="255"/>
+        <constructor-arg index="2" type="int" value="0"/>
+    </bean>
 
 
 </beans>

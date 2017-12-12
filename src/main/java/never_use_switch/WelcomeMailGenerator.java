@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class WelcomeMailGenerator implements MailGenerator {
     @Override
     public String generate(MailInfo mailInfo) {
+        //50 lines of code
         return "<html> Welcome new Client... </html>";
     }
 

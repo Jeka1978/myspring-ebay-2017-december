@@ -17,7 +17,7 @@ public class TalkingRobotImpl implements TalkingRobot {
     private final List<Quoter> quoters;
 
     @Autowired
-    public TalkingRobotImpl(@Film List<Quoter> quoters) {
+    public TalkingRobotImpl(List<Quoter> quoters) {
         this.quoters = quoters;
     }
 
