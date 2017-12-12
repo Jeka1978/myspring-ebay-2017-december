@@ -7,10 +7,15 @@ import org.springframework.stereotype.Component;
  */
 
 
-@Component("1")
+@Component
 public class WelcomeMailGenerator implements MailGenerator {
     @Override
     public String generate(MailInfo mailInfo) {
         return "<html> Welcome new Client... </html>";
+    }
+
+    @Override
+    public int myCode() {
+        return 1;
     }
 }

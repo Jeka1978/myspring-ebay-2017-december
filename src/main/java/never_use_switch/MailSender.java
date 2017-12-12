@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,19 +15,25 @@ import java.util.Map;
 @Service
 public class MailSender {
     private final MailDao dao;
-    private final   Map<String, MailGenerator> map;
+    private Map<Integer, MailGenerator> map = new HashMap<>();
 
     @Autowired
-    public MailSender(MailDao dao, Map<String, MailGenerator> map) {
+    public MailSender(MailDao dao,List<MailGenerator> mailGenerators) {
         this.dao = dao;
-        this.map = map;
+        for (MailGenerator mailGenerator : mailGenerators) {
+            if (map.containsKey(mailGenerator.myCode())) {
+                throw new IllegalStateException(mailGenerator.myCode() + " already in use");
+            }
+            map.put(mailGenerator.myCode(), mailGenerator);
+        }
+
     }
 
 
     @Scheduled(cron = "1/1 * * * * ?")
     public void sendMail() {
         MailInfo mailInfo = dao.getMailInfo();
-        String mailCode = String.valueOf(mailInfo.getMailCode());
+        int mailCode = mailInfo.getMailCode();
         MailGenerator mailGenerator = map.get(mailCode);
         if (mailGenerator == null) {
             throw new UnsupportedOperationException("mailcode " + mailCode + " not supported yet");
