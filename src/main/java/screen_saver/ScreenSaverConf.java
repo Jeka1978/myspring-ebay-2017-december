@@ -18,20 +18,12 @@ public class ScreenSaverConf {
     @Value("${OS}")
     private String os;
 
-    @Bean
-    public ColorFrame colorFrame(){
-        return new ColorFrame() {
-            @Override
-            protected Color getColorBean() {
-                return color();
-            }
-        };
-    }
+
 
 
 
     @Bean
-    @Scope(value = "prototype")
+    @Scope(value = "5sec", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Color color() {
         if (os.toLowerCase().contains("unix")) {
             return Color.GRAY;
@@ -43,6 +35,7 @@ public class ScreenSaverConf {
     @SneakyThrows
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScreenSaverConf.class);
+
         while (true) {
             context.getBean(ColorFrame.class).moveToRandomLocation();
             Thread.sleep(80);
