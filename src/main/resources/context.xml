@@ -5,35 +5,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
-    <bean class="myspring.InjectRandomIntAnnotationObjectConfigurator"/>
-    <bean class="quoters.BeanDefinitionAnalyzerBeanFactoryPostProcessor"/>
+
+    <context:property-placeholder location="quotes.properties"/>
+    <context:component-scan base-package="quoters"/>
+    <context:component-scan base-package="myspring"/>
 
 
-    <bean id="anotherQuoter" class="java.lang.String">
-        <constructor-arg value="get daaaaaaaaaaaaawn"/>
-    </bean>
 
-    <bean id="robot" class="quoters.TalkingRobotImpl">
-        <constructor-arg>
-            <list>
-                <ref bean="shakespearQuoter"/>
-                <ref bean="terminatorQuoter"/>
-            </list>
-        </constructor-arg>
 
-    </bean>
-    <bean id="shakespearQuoter" class="quoters.ShakespearQuoter">
-        <property name="message" value="2 B || ! 2 B"/>
-    </bean>
 
-    <bean id="terminatorQuoter" class="quoters.TerminatorQuoter" destroy-method="terminate">
-        <property name="messages">
-            <list value-type="java.lang.String">
-                <value>I'll be back</value>
-                <ref bean="anotherQuoter"/>
-                <value>Astalavista baby</value>
-            </list>
-        </property>
-    </bean>
+
 </beans>
+
+
+
