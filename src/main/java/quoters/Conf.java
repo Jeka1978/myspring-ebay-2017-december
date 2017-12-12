@@ -9,6 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @Configuration
 @ComponentScan(basePackages = {"quoters","myspring"})
 @PropertySource("classpath:quotes.properties")
+@EnableAspectJAutoProxy
 public class Conf {
 
 

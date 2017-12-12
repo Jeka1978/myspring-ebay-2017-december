@@ -1,4 +1,4 @@
-package quoters;
+package quoters.business;
 
 /**
  * @author Evgeny Borisov

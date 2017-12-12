@@ -1,11 +1,10 @@
-package quoters;
+package quoters.business;
 
-import lombok.Setter;
 import myspring.InjectRandomInt;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import quoters.Book;
+import quoters.Secured;
 
 /**
  * @author Evgeny Borisov
@@ -23,6 +22,7 @@ public class ShakespearQuoter implements Quoter {
     private String message;
 
     @Override
+    @Secured
     public void sayQuote() {
         for (int i = 0; i < repeat; i++) {
             System.out.println(message);

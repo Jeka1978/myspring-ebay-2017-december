@@ -1,4 +1,4 @@
-package quoters;
+package quoters.business;
 
 /**
  * @author Evgeny Borisov
@@ -6,4 +6,5 @@ package quoters;
  */
 public interface TalkingRobot {
     void talk();
+
 }
