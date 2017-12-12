@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Evgeny Borisov
  */
-@Profile("PROD")
+@Prod
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
     @Override

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Evgeny Borisov
  */
-@Profile("DEV")
+@Dev
 @Repository
 public class LocalEmployeeDao implements EmployeeDao {
     @Override
